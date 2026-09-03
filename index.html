@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Dinero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div>
+          <strong>Mi Dinero</strong>
+          <span>Control personal</span>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-section="inicio">⌂ <span>Inicio</span></button>
+        <button class="nav-btn" data-section="historial">◷ <span>Historial</span></button>
+        <button class="nav-btn" data-section="configuracion">⚙ <span>Configuración</span></button>
+      </nav>
+      <div class="sidebar-note">
+        <span>Cuenta personal</span>
+        <b>Débito · Nu</b>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">CONTROL FINANCIERO</p>
+          <h1 id="greeting">Buenos días 👋</h1>
+          <p class="muted" id="periodLabel"></p>
+        </div>
+        <button class="primary" id="addOtherBtn">＋ Registrar gasto</button>
+      </header>
+
+      <section id="inicio" class="section active">
+        <div class="hero-grid">
+          <div class="balance-card">
+            <div class="balance-top">
+              <span>Saldo disponible</span>
+              <span class="chip">Débito · Nu</span>
+            </div>
+            <div class="balance" id="balance">$0</div>
+            <div class="balance-bottom">
+              <span>Dinero inicial de la quincena</span>
+              <strong id="initialMoney">$0</strong>
+            </div>
+          </div>
+          <div class="summary-card">
+            <span class="card-label">Esta quincena</span>
+            <div class="summary-row"><span>💸 Gastos</span><strong id="periodExpenses">$0</strong></div>
+            <div class="summary-row"><span>💜 Ahorro</span><strong id="periodSavings">$0</strong></div>
+            <div class="summary-row"><span>📊 Utilizado</span><strong id="usedPercent">0%</strong></div>
+          </div>
+        </div>
+
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">GASTOS FIJOS POR CONTADOR</p>
+            <h2>Lo que usas esta quincena</h2>
+          </div>
+          <button class="ghost" id="resetCounters">Restablecer contadores</button>
+        </div>
+
+        <div class="counter-grid">
+          <article class="counter-card">
+            <div class="counter-icon transport">🚌</div>
+            <div class="counter-info">
+              <span>Transporte</span>
+              <small>$3.500 por pasaje · máximo sugerido 10/semana</small>
+            </div>
+            <div class="counter-controls">
+              <button class="circle" data-counter="transport" data-delta="-1">−</button>
+              <strong id="transportCount">0</strong>
+              <button class="circle" data-counter="transport" data-delta="1">＋</button>
+            </div>
+            <div class="counter-total" id="transportTotal">$0</div>
+          </article>
+
+          <article class="counter-card">
+            <div class="counter-icon food">🍔</div>
+            <div class="counter-info">
+              <span>Almuerzos</span>
+              <small>$20.000 por almuerzo · cantidad variable</small>
+            </div>
+            <div class="counter-controls">
+              <button class="circle" data-counter="lunch" data-delta="-1">−</button>
+              <strong id="lunchCount">0</strong>
+              <button class="circle" data-counter="lunch" data-delta="1">＋</button>
+            </div>
+            <div class="counter-total" id="lunchTotal">$0</div>
+          </article>
+        </div>
+
+        <div class="lower-grid">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">AHORRO</p>
+                <h2>Mi meta</h2>
+              </div>
+              <button class="ghost" id="addSavingBtn">＋ Añadir ahorro</button>
+            </div>
+            <div class="goal-row">
+              <div class="goal-amount"><strong id="savedAmount">$0</strong><span>de <b id="goalAmount">$0</b></span></div>
+              <div class="goal-percent" id="goalPercent">0%</div>
+            </div>
+            <div class="progress"><span id="goalProgress"></span></div>
+            <div class="goal-footer"><span id="goalName">Meta de ahorro</span><span id="goalRemaining">Faltan $0</span></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">MOVIMIENTOS</p>
+                <h2>Recientes</h2>
+              </div>
+            </div>
+            <div id="recentMovements" class="movements"></div>
+          </section>
+        </div>
+
+        <section class="panel table-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">RESUMEN</p>
+              <h2>Reporte quincenal actual</h2>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Concepto</th><th>Cantidad</th><th>Precio</th><th>Total</th></tr></thead>
+              <tbody id="currentReport"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="historial" class="section">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">ARCHIVO</p>
+            <h2>Historial de quincenas</h2>
+            <p class="muted">Cada quincena cerrada queda guardada aquí.</p>
+          </div>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+
+      <section id="configuracion" class="section">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">PERSONALIZACIÓN</p>
+            <h2>Configuración</h2>
+            <p class="muted">Los valores se guardan solamente en este navegador.</p>
+          </div>
+        </div>
+        <div class="settings-grid">
+          <label>Dinero inicial de la quincena<input id="settingInitial" type="number" min="0" step="1000"></label>
+          <label>Precio del pasaje<input id="settingTransport" type="number" min="0" step="100"></label>
+          <label>Precio del almuerzo<input id="settingLunch" type="number" min="0" step="100"></label>
+          <label>Meta de ahorro<input id="settingGoal" type="number" min="0" step="1000"></label>
+          <label>Nombre de la meta<input id="settingGoalName" type="text" placeholder="Ej. Computador"></label>
+        </div>
+        <button class="primary" id="saveSettings">Guardar configuración</button>
+        <div class="info-box">La página no solicita número de tarjeta, CVV, claves ni credenciales bancarias.</div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="expenseModal">
+    <div class="modal-box">
+      <button class="modal-close" data-close="expenseModal">×</button>
+      <p class="eyebrow">NUEVO MOVIMIENTO</p>
+      <h2>Registrar gasto</h2>
+      <form id="expenseForm">
+        <label>Descripción<input id="expenseDescription" required placeholder="Ej. Snack"></label>
+        <label>Categoría
+          <select id="expenseCategory">
+            <option>Otros</option><option>Compras</option><option>Estudios</option><option>Entretenimiento</option><option>Salud</option>
+          </select>
+        </label>
+        <label>Valor<input id="expenseAmount" type="number" min="0" step="100" required placeholder="0"></label>
+        <button class="primary full" type="submit">Guardar gasto</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="savingModal">
+    <div class="modal-box">
+      <button class="modal-close" data-close="savingModal">×</button>
+      <p class="eyebrow">AHORRO</p>
+      <h2>Añadir a mi ahorro</h2>
+      <form id="savingForm">
+        <label>Cantidad<input id="savingAmount" type="number" min="0" step="1000" required></label>
+        <button class="primary full" type="submit">Guardar ahorro</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
