@@ -109,7 +109,7 @@
               <button class="ghost" id="addSavingBtn">＋ Añadir ahorro</button>
             </div>
             <div class="goal-row">
-              <div class="goal-amount"><strong id="savedAmount">$0</strong><span>de <b id="goalAmount">$0</b></span></div>
+              <div class="goal-amount"><strong id="savedAmount">$0</strong><span>de <b id="goalAmount">$0</b></span><small class="period-saving-label">Esta quincena: <b id="periodSavingsGoal">$0</b></small></div>
               <div class="goal-percent" id="goalPercent">0%</div>
             </div>
             <div class="progress"><span id="goalProgress"></span></div>
@@ -148,7 +148,7 @@
           <div>
             <p class="eyebrow">ARCHIVO</p>
             <h2>Historial de quincenas</h2>
-            <p class="muted">Cada quincena cerrada queda guardada aquí.</p>
+            <p class="muted">Las quincenas se cierran y se guardan automáticamente al volver a abrir la página después de su fecha de cierre.</p>
           </div>
         </div>
         <div id="historyList" class="history-list"></div>
@@ -163,7 +163,7 @@
           </div>
         </div>
         <div class="settings-grid">
-          <label>Dinero inicial de la quincena<input id="settingInitial" type="number" min="0" step="1000"></label>
+          <label>Dinero que recibes cada quincena<input id="settingInitial" type="number" min="0" step="1000"></label>
           <label>Precio del pasaje<input id="settingTransport" type="number" min="0" step="100"></label>
           <label>Precio del almuerzo<input id="settingLunch" type="number" min="0" step="100"></label>
           <label>Meta de ahorro<input id="settingGoal" type="number" min="0" step="1000"></label>
